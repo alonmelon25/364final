@@ -3,7 +3,7 @@ import json
 import datetime
 import requests
 
-import pdb
+import pdb # For debugging purposes
 
 from flask import Flask, url_for, redirect, render_template, session, request, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -409,7 +409,7 @@ def delete(item):
 
 @app.route('/director', methods= ['GET','POST'])
 def director():
-    directors = Director.query.filter_by()
+    directors = Director.query.all()
     return render_template('all_directors.html', directors=directors)
 
 ###################################
