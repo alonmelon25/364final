@@ -49,9 +49,9 @@ View All Directors: Users are able to view all of the directors that has appeare
 - /all_movies --> Directs users to a page where they can see all the movies that have searched from past to present.
 - /rating --> Directs users to a page where they can rate a movie out of 5.
 - /all_ratings --> Directs users to a page where they can see all the movies they have rated. The list is sorted and ordered from highest to lowest rating.
-- /list/<i> --> This page will get prompted only when users wish to update a movie they have rated.
-- /update/<title> --> Directs users to a page where they can update the rating of a movie they rated. This page allows users to select a new rating out of 5. Upon successful update, it redirects users to the all ratings page.
-- /delete/<item> --> Route that allows users to delete a movie they have rated. Upon successful delete, it redirects users to the all ratings page.
+- /list --> This page will get prompted only when users wish to update a movie they have rated.
+- /update --> Directs users to a page where they can update the rating of a movie they rated. This page allows users to select a new rating out of 5. Upon successful update, it redirects users to the all ratings page.
+- /delete --> Route that allows users to delete a movie they have rated. Upon successful delete, it redirects users to the all ratings page.
 - /director --> Directs users to a page where they can view all the directors that has been saved in the database so far. Therefore, the visible directors are based on the movies that the users have searched in the past.
 
 ## Requirements
