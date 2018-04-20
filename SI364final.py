@@ -50,7 +50,7 @@ class ProdConfig(Config):
     """Production config"""
     DEBUG = False
     USE_RELOADER = True
-    SQLALCHEMY_DATABASE_URI = "postgresql://localhost/SI364final_prod"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or "postgresql://localhost/SI364final_prod"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
