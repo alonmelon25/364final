@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All movies</h1>
+<ul>
+{% for m in movies %}
+  <li><b>Movie Title:</b> {{ m.title }}</a></li>
+  <b>Plot:</b> {{ m.plot }}<br>
+  <b>Rated:</b> {{ m.rated }}<br>
+  <b>Released Date:</b> {{ m.released }}<br>
+  <b>Total Duration:</b> {{ m.runtime }}<br>
+  <b>Genre:</b> {{ m.genre }}<br>
+  <b>Director:</b> {{ m.director }}<br><br>
+{% endfor %}
+</ul>
+
+{% if not movies %}
+    There are no movie entries to show.
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+  {{ mov.title }}
+{% for dir in dirs %}
+  <li>
+    Director: {{ dir.name }}
+  </li>
+{% endfor %}
+<form method="POST" action="/update/{{ mov.title }}">
+  {{ form.hidden_tag() }}
+  {{ form.submit() }}
+  <br>
+</form>
+</ul>
+
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="/update/{{ title }}">
+  <p>Hello</p>
+  {{ form.hidden_tag() }}
+  {{ form.rating_update.label() }}{{ form.rating_update() }}<br>
+  {{ form.submit() }}<br>
+</form>
+
+<div>
+{% for message in get_flashed_messages() %}
+{{ message }}
+{% endfor %}
+</div>
+
+{% endblock %}
