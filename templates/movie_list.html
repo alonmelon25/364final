@@ -3,11 +3,14 @@
 {% block content %}
 
 <ul>
-  {{ mov.title }}
+    <b>Movie:</b> {{ mov.title }}<br>
+    <b>Plot:</b> {{ mov.plot }}<br>
+    <b>Rated:</b> {{ mov.rated }}<br>
+    <b>Released Date:</b> {{ mov.released }}<br>
+    <b>Total Duration:</b> {{ mov.runtime }}<br>
+    <b>Genre:</b> {{ mov.genre }}<br>
 {% for dir in dirs %}
-  <li>
-    Director: {{ dir.name }}
-  </li>
+    <b>Director:</b> {{ dir.name }}
 {% endfor %}
 <form method="POST" action="/update/{{ mov.title }}">
   {{ form.hidden_tag() }}
