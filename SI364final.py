@@ -82,8 +82,6 @@ def get_movie_info(title):
     # img = 'http://img.omdbapi.com/?apikey=9d267298&'
     params = {'t': title}
     r = requests.get(url, params = params).json()
-    print("Print title", title)
-    print("Print response", r)
     return r
 
 ##################
@@ -160,11 +158,6 @@ class MovieForm(FlaskForm):
     title = StringField("Enter name of movie:", validators= [Required(), Length(1,128)])
     submit = SubmitField()
 
-class DirectorForm(FlaskForm):
-    # Form that asks users to enter director of movie in order to search a movie by director
-    name = StringField("Enter director name:", validators=[Required(), Length(1,256)])
-    submit = SubmitField()
-
 class RatingForm(FlaskForm):
     # Form that asks users to rate movies
     title = StringField("Enter name of movie:", validators=[Required(), Length(1,128)])
@@ -187,20 +180,17 @@ class DeleteButtonForm(FlaskForm):
 #############################
 def get_or_create_movie(title, plot, rated, released, runtime, genre, director_name):
     # Always returns a movie instance
-    print("In movie")
     movie = Movie.query.filter_by(title=title, plot=plot, rated=rated, released=released,
     runtime=runtime, genre=genre, director=director_name).first()
     if movie:
         return movie
     else:
-        print("title", title)
         movie_entry = Movie(title=title, plot=plot, rated=rated, released=released,
         runtime=runtime, genre=genre, director=director_name)
         response = get_movie_info(title)
         director = response['Director'].split(',')
         for d in director:
             #pdb.set_trace()
-            print(d)
             d = get_or_create_director(d)
             movie_entry.directors.append(d)
         db.session.add(movie_entry)
@@ -217,7 +207,6 @@ def get_or_create_director(name):
         db.session.add(director_entry)
         db.session.commit()
         return director_entry
-        # print("Director 2",director_entry.name)
 
 def get_or_create_rating(title, rating):
     # Always returns a rating instance
@@ -344,7 +333,7 @@ def movie():
 def all_movies():
     movies = Movie.query.all()
     return render_template('all_movies.html', movies=movies)
-    # Allows users to view all movies to-do (to watch).
+    # Allows users to view all movies.
     # The list is created by the users. Therefore, it can only be seen by the logged in user. Other users cannot see the list.
 
 @app.route('/rating', methods= ['GET','POST'])
@@ -390,8 +379,6 @@ def all_ratings():
     ratings = sorted(ratings, key = lambda r: r.rating, reverse=True)
     return render_template('all_ratings.html', form=form, ratings=ratings)
     # Allows users to view all movies with movies that the users have rated
-    # If possible, the all ratings page will rank from highest rating to lowest rating as to give a better visual to the users of the order of priority of which movies to watch.
-    # A list for watched movies so have ratings
 
 @app.route('/list/<i>',methods=["GET","POST"])
 def mov_list(i):
@@ -419,11 +406,6 @@ def delete(item):
     db.session.commit()
     # flash("Successfully deleted: {}".format(m.title))
     return redirect(url_for('all_ratings'))
-    # m = Movie.query.filter_by(id=item).first()
-    # db.session.delete(m)
-    # db.session.commit()
-    # # flash("Successfully deleted: {}".format(m.title))
-    # return redirect(url_for('all_movies'))
 
 @app.route('/director', methods= ['GET','POST'])
 def director():
